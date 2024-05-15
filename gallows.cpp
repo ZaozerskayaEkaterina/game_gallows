@@ -21,7 +21,7 @@ int length, key;
 void SetXY(short X, short Y)
 {
     COORD coord = { X, Y };
-    SetConsoleCursorPosition(hStdOut, coord);    // функция, которая устанавливает положение курсора в указанном буфере экрана консоли 
+    SetConsoleCursorPosition(hStdOut, coord);    //функция, которая устанавливает положение курсора в указанном буфере экрана консоли 
 }
 
 enum ConsoleColor     //перечисление, которое определяет константы, определяющие основной цвет и цвет фона консоли
@@ -54,12 +54,12 @@ void Start()   //выбор темы
 {
     SetColor(Cyan, Black); SetXY(12, 3); cout << "Для начала игры, выбери тему:" << endl;
     SetColor(LightCyan, Black);
-    SetXY(12, 5); cout << "Легко - 'S'        Средне - 'M' " << endl;
-    SetXY(12, 8); cout << "          Сложно - 'H' " << endl;
+    SetXY(12, 5); cout << "Легко (3 буквы) - 'S'        Средне (4 буквы) - 'M' " << endl;
+    SetXY(12, 8); cout << "             Сложно (6 букв) - 'H' " << endl;
     SetXY(12, 11); cout << "Режим вдвоем - 'D'        Рандомный режим - 'R' " << endl;
-    SetColor(DarkGray, Black); SetXY(10, 13); cout << "(Для выбора нажми на букву на клавиатуре)" << endl;
+    SetColor(DarkGray, Black); SetXY(10, 13); cout << "(Для выбора нажми букву на клавиатуре)" << endl;
 
-    while (!(key == 's' || key == 'S' || key == 'm' || key == 'M' || key == 'h' || key == 'H' || key == 'd' || key == 'D'))
+    while (!(key == 's' || key == 'S' || key == 'm' || key == 'M' || key == 'h' || key == 'H' || key == 'd' || key == 'D')) //проверяет какая клавиша была нажата
     {
         if (_kbhit()) 
         {
@@ -86,10 +86,10 @@ string PlayingTogether() //выбор слова с совместной игр�
 
     string word_input;
     SetColor(LightCyan, Black);
-    SetXY(12, 2); cout << "Игрок 2, закрой глаза !!! ";
-    SetXY(12, 5); cout << "Игрок 1, введи слово, которое будет угадывать Игрок 2: ";
+    SetXY(12, 2); cout << "Игрок 1, закрой глаза !!! ";
+    SetXY(12, 5); cout << "Игрок 2, введи слово, которое будет угадывать Игрок 1: ";
     SetColor(DarkGray, Black);
-    cin >> word_input;
+    cin >> word_input; //запрос загадать слово
 
     return word_input;
 
@@ -123,7 +123,7 @@ void ChooseWord() //вызов выбранной темы и рандомног
 }
 
 
-void Walls()  //поле
+void Walls()  //поле для виселицы
 {
     SetColor(Blue, Black);
 
@@ -145,7 +145,7 @@ bool isWordGuessed()    //проверяет, были ли все буквы и
 {
     for (char c : word) 
     {
-        if (guessedLetters.find(c) == string::npos) 
+        if (guessedLetters.find(c) == string::npos) //если хотя бы одна буква из загаданного слова не была угадана, функция вернет false, иначе вернет true
         {
             return false;
         }
@@ -156,7 +156,7 @@ bool isWordGuessed()    //проверяет, были ли все буквы и
 void printHangman(int attemptsLeft)    //рисует виселицу по кол-ву ошибок
 {
     SetColor(Brown, Black);
-    if (attemptsLeft == 7) 
+    if (attemptsLeft == 7) //рисует постамент
     {
         for (int m = 19; m < 26; m++) 
         {
@@ -168,7 +168,7 @@ void printHangman(int attemptsLeft)    //рисует виселицу по ко
             SetXY(18, m); cout << "|";
         }
     }
-    else if (attemptsLeft == 6) 
+    else if (attemptsLeft == 6) //добавление частей тела в зависимости от номера ошибки
     {
         SetColor(DarkGray, Black); SetXY(26, 7); cout << "|" << endl;
     }
@@ -198,14 +198,14 @@ void printHangman(int attemptsLeft)    //рисует виселицу по ко
     }
 }
 
-void printGuessedWord()     //используется для вывода угаданных букв и пропусков в слове word на экране
+void printGuessedWord()     //вывод угаданных букв и пропусков в слове word на экране
 {
     SetColor(LightCyan, Black);
-    int m = (23 - length / 2);
+    int m = (23 - length / 2); //начальная позиция по оси X для вывода слова
     SetXY(m, 15);
     for (char c : word) 
     {
-        if (guessedLetters.find(c) != string::npos) 
+        if (guessedLetters.find(c) != string::npos) //если буква содержится в "guessedLetters", то она выводится на экран на нужной позиции
         {
             cout << c;
         }
@@ -230,16 +230,16 @@ int main()   //-----------ИГРА
         Walls();
 
         
-        length = word.length();
+        length = word.length(); //длина загаданного слова
 
-        int attemptsLeft = 7;
+        int attemptsLeft = 7; //оставшиеся попытки
 
         SetXY(3, 18); cout << "Введи букву: ";
 
         int enterX = 20;
         char guess;
 
-        while (attemptsLeft > 0 && !isWordGuessed()) 
+        while (attemptsLeft > 0 && !isWordGuessed()) //игра идет пока не кончатся попытки или не отгадается слово
         {
             SetColor(Cyan, Black); SetXY(5, 2); cout << "У тебя   попыток ввести букву.";
             SetXY(12, 2); cout << attemptsLeft;
@@ -253,12 +253,12 @@ int main()   //-----------ИГРА
             SetColor(LightCyan, Black); SetXY(enterX, 18);
             cin >> guess;
 
-            if (word.find(guess) != string::npos) 
+            if (word.find(guess) != string::npos) //если буква угадана правильно
             {
                 SetColor(Green, Black); SetXY(19, 4); cout << "Правильно!" << endl;
                 guessedLetters += guess;
             }
-            else 
+            else //если буква угадана неправильно
             {
                 SetColor(Red, Black); SetXY(19, 4); cout << "   Ошибка! " << endl;
                 attemptsLeft--;
@@ -267,25 +267,26 @@ int main()   //-----------ИГРА
 
         printHangman(attemptsLeft);
 
-        if (isWordGuessed()) 
+        if (isWordGuessed()) //если слово угадано правильно
         {
             int m = (23 - length / 2);
             SetColor(LightCyan, Black); SetXY(m, 15); cout << word;
             m = 58 - ((39 + length) / 2);
             SetColor(Green, Black); SetXY(m, 8); cout << "Поздравляю, ты угадал слово: " << word << '.' << endl;
         }
-        else
+        else //если слово угадано неправильно
         {
             int m = 58 - ((30 + length) / 2);
             SetColor(Red, Black); SetXY(m, 8); cout << "Ты не угадал слово: " << word << '.' << endl;
         }
 
-        key = 0;
+        key = 0; //обнуление ключа темы для выбора дальнейшего действия
 
         SetColor(White, Black);
         SetXY(43, 10); cout << "Для начала игры, нажми 'S'." << endl;
         SetXY(43, 11); cout << "Для выхода из игры, нажми 'Esc'." << endl;
-        while (key != 's' && key != 'S' && key != VK_ESCAPE)
+
+        while (key != 's' && key != 'S' && key != VK_ESCAPE) //если игрок выбрал повторить игру
         { 
             if (_kbhit()) 
             {
@@ -294,12 +295,12 @@ int main()   //-----------ИГРА
             }
         }
 
-        if (key == VK_ESCAPE) 
+        if (key == VK_ESCAPE) //если игрок выбрал выйти из игры
         { 
             break; 
         }
 
-        length = key = 0;
+        length = key = 0; //обнуление переменных для продолжения игры
         word = "";
         guessedLetters = "";
     }
