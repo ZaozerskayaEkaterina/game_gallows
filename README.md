@@ -11,7 +11,7 @@
 8. Если игроку удаётся угадать слово, он выигрывает.
 
 ![image](https://github.com/ZaozerskayaEkaterina/game_gallows/assets/144162519/bb563c52-fb79-4d9b-b650-8ab96fefca37)
-![image](https://github.com/ZaozerskayaEkaterina/game_gallows/assets/144162519/5a64b6a8-81bf-46a9-a898-0098fb69eee8)
 ![image](https://github.com/ZaozerskayaEkaterina/game_gallows/assets/144162519/70c96291-5667-4b3a-a338-7127f6e7e573)
 ![image](https://github.com/ZaozerskayaEkaterina/game_gallows/assets/144162519/24cd9632-800a-4e62-ad95-c935ab8df0e7)
 ![image](https://github.com/ZaozerskayaEkaterina/game_gallows/assets/144162519/8e57513f-8bfe-453b-81c6-1b5ea66f1d66)
+![image](https://github.com/ZaozerskayaEkaterina/game_gallows/assets/144162519/5a64b6a8-81bf-46a9-a898-0098fb69eee8)
