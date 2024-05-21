@@ -22,9 +22,9 @@
 рис.1 - главный экран
 ![image](https://github.com/ZaozerskayaEkaterina/game_gallows/assets/144162519/70c96291-5667-4b3a-a338-7127f6e7e573)
 рис.2 - угадывание слова
-![image](https://github.com/ZaozerskayaEkaterina/game_gallows/assets/144162519/24cd9632-800a-4e62-ad95-c935ab8df0e7)
+![image](https://github.com/ZaozerskayaEkaterina/game_gallows/assets/144162519/f400b21d-2c6e-4486-8b27-ef24de08e644)
 рис.3 - экран при угаданном слове
-![image](https://github.com/ZaozerskayaEkaterina/game_gallows/assets/144162519/8e57513f-8bfe-453b-81c6-1b5ea66f1d66)
+![image](https://github.com/ZaozerskayaEkaterina/game_gallows/assets/144162519/9b6585d5-72fe-4e35-94ef-634e7b8c0714)
 рис.4 - экран при неугаданном слове
 ![image](https://github.com/ZaozerskayaEkaterina/game_gallows/assets/144162519/5a64b6a8-81bf-46a9-a898-0098fb69eee8)
 рис.5 - экран при выборе режима игры вдвоем
@@ -77,6 +77,6 @@ conio.h - содержатся функции для чтения символо
 <hr>
 Техническое описание проекта:
 
-Для того, чтобы запустить игру, скаайте zin-папку с главной страницы проекта "game_gallows" на данном сайте. Распакуйте папку в каталоге, где хранятся Ваши проекты. Запустите из проекта в установленной у Вас среде разработки, которая поддерживает язык С++, файл "gallows". Наслаждайтесь игрой.
+Для того, чтобы запустить игру, скаайте zin-папку с главной страницы проекта "game_gallows" на данном сайте. Распакуйте zip-папку. Запустите проект в установленной у Вас среде разработки, которая поддерживает язык С++. Наслаждайтесь игрой.
 
 Если вдруг где-то Вы обнаружите ошибку, описку или неточность, или если вы хотите что-то дополнить, то пишите мне в telegram: ***https://t.me/koterina333***
