@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include <ctime>
@@ -6,15 +7,11 @@
 #include <conio.h>      
 using namespace std;
 
-HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE); 
+HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 //функция, которая возвращает дескриптор стандартного выходного потока
 //c помощью этого дескриптора программы могут выполнять операции записи или вывода на стандартный выходной поток
 
 vector <int> wordsKey = { 1, 2, 3 };
-vector <string> wordsS = { "лес", "пес", "кот" };
-vector <string> wordsM = { "куст", "лист", "мост" };
-vector <string> wordsH = { "папка", "шарик", "творог" };
-
 string word, guessedLetters;
 int length, key;
 
@@ -60,12 +57,12 @@ void Start()   //выбор темы
 
     SetColor(DarkGray, Black); SetXY(10, 16); cout << "(Для выбора нажми букву на клавиатуре)" << endl;
 
-    while (!(key == 's' || key == 'S' || key == 'm' || key == 'M' || key == 'h' || key == 'H' || key == 'd' || key == 'D' )) //проверяет какая клавиша была нажата
+    while (!(key == 's' || key == 'S' || key == 'm' || key == 'M' || key == 'h' || key == 'H' || key == 'd' || key == 'D')) //проверяет какая клавиша была нажата
     {
         if (_kbhit())    //ожидание нажатия кнопки
         {
             key = _getch();   //код нажатой кнопки
-            if (key == 'r' || key == 'R') 
+            if (key == 'r' || key == 'R')
             {
                 key = wordsKey[rand() % wordsKey.size()];
                 break;
@@ -99,28 +96,44 @@ string PlayingTogether() //выбор слова в совместной игр�
 
 void ChooseWord() //вызов выбранной темы и рандомного слово из нее
 {
+    string fName, sTitle;
+
     if (key == 's' || key == 'S' || key == 1) //легко
-    { 
-        word = wordsS[rand() % wordsS.size()];
-        SetColor(Cyan, Black); SetXY(3, 17); cout << "Режим: легко." << endl;
+    {
+        fName = "S.txt";
+        sTitle = "Режим: легко.";
     }
     else if (key == 'm' || key == 'M' || key == 2) //средне
-    { 
-        word = wordsM[rand() % wordsM.size()];
-        SetColor(Cyan, Black); SetXY(3, 17); cout << "Режим: средне." << endl;
+    {
+        fName = "M.txt";
+        sTitle = "Режим: средне.";
     }
     else if (key == 'h' || key == 'H' || key == 3) //сложно
-    { 
-        word = wordsH[rand() % wordsH.size()];
-        SetColor(Cyan, Black); SetXY(3, 17); cout << "Режим: сложно." << endl;
+    {
+        fName = "H.txt";
+        sTitle = "Режим: сложно.";
     }
-    else if (key == 'd' || key == 'D' ) //вдвоем
-    { 
+    else if (key == 'd' || key == 'D') //вдвоем
+    {
         word = PlayingTogether();
 
         clearScreen();
         SetColor(Cyan, Black); SetXY(3, 17); cout << "Режим: вдвоем." << endl;
+        return;
     }
+
+    SetColor(Cyan, Black); SetXY(3, 17); cout << sTitle << endl;
+
+    ifstream wordsFile(fName);    //заполнение вектора словами из выбранного текстового файла
+    istream_iterator<string> start(wordsFile), end;
+    vector<string> words(start, end);
+    if (words.size() == 0)
+    {
+        clearScreen();
+        SetColor(Red, Black); SetXY(3, 17); cout << "Ошибка чтения словаря!" << endl;
+        return;
+    }
+    word = words[rand() % words.size()];
 }
 
 
@@ -128,13 +141,13 @@ void Walls()  //поле для виселицы
 {
     SetColor(Blue, Black);
 
-    for (int m = 15; m < 31; m++) 
+    for (int m = 15; m < 31; m++)
     {
         SetXY(m, 5); cout << "*";
         SetXY(m, 14); cout << "*";
     }
 
-    for (int m = 6; m < 14; m++) 
+    for (int m = 6; m < 14; m++)
     {
         SetXY(15, m); cout << "*";
         SetXY(30, m); cout << "*";
@@ -144,7 +157,7 @@ void Walls()  //поле для виселицы
 
 bool isWordGuessed()    //проверяет, были ли все буквы из переменной word угаданы, находятся ли они в переменной "guessedLetters"
 {
-    for (char c : word) 
+    for (char c : word)
     {
         if (guessedLetters.find(c) == string::npos) //если хотя бы одна буква из загаданного слова не была угадана, функция вернет false, иначе вернет true
         {
@@ -159,12 +172,12 @@ void printHangman(int attemptsLeft)    //рисует виселицу по ко
     SetColor(Brown, Black);
     if (attemptsLeft == 7) //рисует постамент
     {
-        for (int m = 19; m < 26; m++) 
+        for (int m = 19; m < 26; m++)
         {
             SetXY(m, 6); cout << "_";
         }
 
-        for (int m = 7; m < 13; m++) 
+        for (int m = 7; m < 13; m++)
         {
             SetXY(18, m); cout << "|";
         }
@@ -173,27 +186,27 @@ void printHangman(int attemptsLeft)    //рисует виселицу по ко
     {
         SetColor(DarkGray, Black); SetXY(26, 7); cout << "|" << endl;
     }
-    else if (attemptsLeft == 5) 
+    else if (attemptsLeft == 5)
     {
         SetColor(White, Black); SetXY(26, 8); cout << "0" << endl;
     }
-    else if (attemptsLeft == 4) 
+    else if (attemptsLeft == 4)
     {
         SetColor(White, Black); SetXY(26, 9); cout << "|" << endl;
     }
-    else if (attemptsLeft == 3) 
+    else if (attemptsLeft == 3)
     {
         SetColor(White, Black); SetXY(25, 9); cout << "/" << endl;
     }
-    else if (attemptsLeft == 2) 
+    else if (attemptsLeft == 2)
     {
         SetColor(White, Black); SetXY(27, 9); cout << "\\" << endl;
     }
-    else if (attemptsLeft == 1) 
+    else if (attemptsLeft == 1)
     {
         SetColor(White, Black); SetXY(25, 10); cout << "/" << endl;
     }
-    else if (attemptsLeft == 0) 
+    else if (attemptsLeft == 0)
     {
         SetColor(White, Black); SetXY(27, 10); cout << "\\" << endl;
     }
@@ -204,7 +217,7 @@ void printGuessedWord()     //вывод угаданных букв и проп
     SetColor(LightCyan, Black);
     int m = (23 - length / 2); //начальная позиция по оси X для вывода слова
     SetXY(m, 15);
-    for (char c : word) 
+    for (char c : word)
     {
         if (guessedLetters.find(c) != string::npos) //если буква содержится в "guessedLetters", то она выводится на экран на нужной позиции
         {
@@ -216,21 +229,22 @@ void printGuessedWord()     //вывод угаданных букв и проп
 
 int main()   //-----------ИГРА
 {
+    //setlocale(LC_ALL, "Russian");
     SetConsoleOutputCP(1251);
     SetConsoleCP(1251);
 
     srand(time(NULL));
     SetColor(LightGreen, Black); SetXY(19, 1); cout << "Добро пожаловать в Виселицу!" << endl;
 
-    while (true) 
+    while (true)
     {
-         Start();
+        Start();
         clearScreen();
 
         ChooseWord();
         Walls();
 
-        
+
         length = word.length(); //длина загаданного слова
 
         int attemptsLeft = 7; //оставшиеся попытки
@@ -287,22 +301,26 @@ int main()   //-----------ИГРА
         SetXY(43, 10); cout << "Для начала игры, нажми 'S'." << endl;
         SetXY(43, 11); cout << "Для выхода из игры, нажми 'Esc'." << endl;
 
-        while (key != 's' && key != 'S' && key != VK_ESCAPE) //если игрок выбрал повторить игру
-        { 
-            if (_kbhit()) 
+        while (true)
+        {
+            if (_kbhit())
             {
-                key = _getch();
-                clearScreen();
+                key = _getch();   //код нажатой кнопки
+                if (key == 's' || key == 'S')
+                {
+                    clearScreen();
+                    break;
+                }
+                if (key == VK_ESCAPE) //если игрок выбрал выйти из игры
+                    return 1;
             }
         }
 
-        if (key == VK_ESCAPE) //если игрок выбрал выйти из игры
-        { 
-            break; 
-        }
 
         length = key = 0; //обнуление переменных для продолжения игры
         word = "";
         guessedLetters = "";
     }
+
+    return 1;
 }
