@@ -20,7 +20,7 @@
 
 ![image](https://github.com/ZaozerskayaEkaterina/game_gallows/assets/144162519/bb563c52-fb79-4d9b-b650-8ab96fefca37)
 рис.1 - главный экран
-![image](https://github.com/ZaozerskayaEkaterina/game_gallows/assets/144162519/70c96291-5667-4b3a-a338-7127f6e7e573)
+![image](https://github.com/ZaozerskayaEkaterina/game_gallows/assets/144162519/a007380a-eef6-49e3-8c3c-167e617fb42f)
 рис.2 - угадывание слова
 ![image](https://github.com/ZaozerskayaEkaterina/game_gallows/assets/144162519/f400b21d-2c6e-4486-8b27-ef24de08e644)
 рис.3 - экран при угаданном слове
