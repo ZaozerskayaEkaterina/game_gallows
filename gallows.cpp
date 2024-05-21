@@ -127,6 +127,7 @@ void ChooseWord() //вызов выбранной темы и рандомног
     ifstream wordsFile(fName);    //заполнение вектора словами из выбранного текстового файла
     istream_iterator<string> start(wordsFile), end;
     vector<string> words(start, end);
+
     if (words.size() == 0)
     {
         clearScreen();
@@ -266,7 +267,8 @@ int main()   //-----------ИГРА
 
             enterX++;
             SetColor(LightCyan, Black); SetXY(enterX, 18);
-            cin >> guess;
+            guess = _getch();
+            cout << guess;
 
             if (word.find(guess) != string::npos) //если буква угадана правильно
             {
