@@ -128,7 +128,7 @@ void ChooseWord() //вызов выбранной темы и рандомног
     istream_iterator<string> start(wordsFile), end;
     vector<string> words(start, end);
 
-    if (words.size() == 0)
+    if (words.size() == 0)     //проверка вызванного файла
     {
         clearScreen();
         SetColor(Red, Black); SetXY(3, 17); cout << "Ошибка чтения словаря!" << endl;
